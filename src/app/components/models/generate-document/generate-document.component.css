@@ -1,0 +1,9 @@
+span.mat-option-text div {
+    margin-bottom: -31px;
+}
+
+.trash{
+    position: absolute;
+    top: 10px;
+    right: -5px;
+}

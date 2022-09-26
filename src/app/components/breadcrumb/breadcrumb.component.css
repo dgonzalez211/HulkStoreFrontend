@@ -1,0 +1,21 @@
+h2 {
+    font-size: 24px;
+}
+.breadcrumb {
+    background-color: #ffffff;
+    padding: 0;
+    margin-bottom: 0;
+    border-radius: 4px;
+    list-style: none;
+}
+.breadcrumb>li {
+    display: inline-block;
+}
+.breadcrumb > li a {
+    color: inherit;
+}
+
+
+.breadcrumb > li a.active {
+    font-weight: bold;
+}

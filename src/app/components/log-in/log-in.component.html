@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row pt-5 container-form">
+        <div class="col-12">
+            <mat-card>
+                <mat-card-header>
+                    <div class="logo">
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+                                <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                            </filter>
+                        </svg>
+                        <span filter-content="S">Hulk Store</span>
+                    </div>
+                </mat-card-header>
+                <mat-card-content>
+                    <form (ngSubmit)="formLogin.valid && login()" [formGroup]="formLogin">
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>User</mat-label>
+                                    <input matInput formControlName="userName" placeholder="User">
+                                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                                    <mat-error align="end" *ngIf="formLogin.get('userName')?.invalid">
+                                        Please enter a valid user!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Please enter your password</mat-label>
+                                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-error align="end" *ngIf="formLogin.get('password')?.invalid">
+                                        You must enter a password
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <button mat-raised-button class="btn-log" [disabled]="isLoadingResults"
+                            color="primary">Sign In</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Ubuntu, "Ubuntu Light", Ubuntu, "Ubuntu Light", sans-serif; }
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 60px;
+}
+.mat-drawer-side {
+    border: none;
+}
+
+mat-sidenav.sidenav {
+    background-color: #f4f4f4;
+}
+
+.mat-list-item{
+    font-size: .9rem;
+    letter-spacing: .6px;
+}
+
+.content {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 20px 30px;
+}
+
+.margin_footer {
+    margin-bottom: 140px;
+}
+
+mat-toolbar.mat-toolbar.header-toolbar.mat-toolbar-single-row {
+    background-color: whitesmoke;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-table {
+    background: #fff;
+}
+
+[mat-sort-header].cdk-keyboard-focused .mat-sort-header-container, [mat-sort-header].cdk-program-focused .mat-sort-header-container{
+    border: none !important;
+}
+
+.mat-snack-bar-container {
+    background-color: transparent;
+    box-shadow: none;
+    position: fixed;
+    top: 0;
+    right: 0px;
+}
+
+.breadcrumb>li+li:before {
+    color: #ccc;
+    content: '';
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    background-color: #886bf2;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-left: 4px;
+    background-image: linear-gradient(5deg,#004ba0,#003c8f)!important;
+    background-repeat: repeat-x!important;
+}
+
+.breadcrumb li {
+    height: 40px;
+    line-height: 40px;
+}
+
+.breadcrumb > li a.active{
+    font-weight: 700;
+}
+
+#breadcrumb_content, .breadcrumb {
+    background-color: transparent!important;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 1rem;
+    list-style: none;
+}
+a {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+.form mat-form-field {
+    width: 100%;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #0000000a;
+}
+
+.table-striped tbody tr{
+    cursor: pointer;
+}
+
+mat-sidenav.sidenav {
+    background-image: linear-gradient(5deg,#1976d2,#1e88e5)!important;
+    background-repeat: repeat-x!important;
+}
+
+.mat-nav-list .mat-list-item {
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+}
+
+.mat-toolbar.nav-header.mb-4.ng-tns-c68-0.mat-toolbar-single-row {
+    background-color: #ffffff0f;
+}
+
+.brand-collapse {
+    width: 100%;
+    color: #fff;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #005cb2;
+}
+span.mat-option-text div {
+    margin-bottom: -31px;
+}
+span.mat-option-text small {
+    font-size: .675em;
+}
+.mat-progress-bar-fill::after{
+    background-color: #6ab7ff;
+}
+.mat-progress-bar-buffer {
+    background-color: #6ec6ff;
+}
+
+.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {
+    color: #2196f3;
+}

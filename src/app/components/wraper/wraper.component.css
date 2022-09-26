@@ -1,0 +1,8 @@
+svg#clouds{
+    position: fixed;
+    bottom: -210px;
+    left: -230px;
+    z-index: -10;
+    width: 1800px;
+    color: #1e88e5;
+}

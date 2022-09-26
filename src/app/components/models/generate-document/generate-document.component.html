@@ -1,0 +1,147 @@
+<div class="progress-content">
+    <mat-progress-bar [mode]="'indeterminate'" *ngIf="isLoadingResults"> </mat-progress-bar>
+</div>
+<app-breadcrumb [show]=true [bread]="bread"></app-breadcrumb>
+
+<div class="content margin_footer">
+    <mat-card class="mat-elevation-z2">
+        <mat-card-content class="dashboard-card-content">
+            <div class="row">
+                <mat-form-field appearance="fill" class="search-input col-6">
+                    <mat-label>Document type</mat-label>
+                    <input matInput #documentSearchInput required autocomplete="off" matInput
+                        placeholder="Search document type" [matAutocomplete]="autoTypedocument"
+                        (keyup)="typeHeadDocumentType($event)" [(ngModel)]="commercialDocument.typeDocument">
+
+                    <mat-autocomplete #autoTypedocument="matAutocomplete" [displayWith]="displayTypeDocumeFn">
+                        <mat-option *ngFor="let document of documentypeSearch "  [value]="document" class="document"
+                            (onSelectionChange)="selectDocumentType(document)">
+                            <div>
+                                <span>{{ document.name }}</span>
+                            </div>
+                            <small>{{ document.description }} </small>
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix class="icon-search">search
+                    </mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="search-input col-6">
+                    <mat-label>{{(commercialDocument.typeDocument.inventoryOutput)?'Customer':'Provider'}}</mat-label>
+                    <input matInput #customerSearchInput required autocomplete="off" matInput
+                        placeholder="Buscar {{(commercialDocument.typeDocument.inventoryOutput)?'Customer':'Provider'}}"
+                        [matAutocomplete]="autoCustomer" (keyup)="typeHeadCustomer($event)"
+                        [(ngModel)]="commercialDocument.customer">
+
+                    <mat-autocomplete #autoCustomer="matAutocomplete" [displayWith]="displayCustomerFn">
+                        <mat-option *ngFor="let customer of customerSearch " [disabled]="!validCustomer(customer)" [value]="customer" class="document"
+                            (onSelectionChange)="selectCustomer(customer)">
+                            <div>
+                                <span>{{ customer.name }}</span>
+                            </div>
+                            <small>{{ customer.lastName }} {{ customer.surName }} </small>
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix class="icon-search">search
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <table id="table_generate" mat-table #tableGenerate [dataSource]="commercialDocument.details"
+                        aria-label="Elements" class="main generate-table table-striped">
+
+                        <ng-container matColumnDef="item_description">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Product
+                            </th>
+                            <td mat-cell *matCellDef="let row; let i = index;">
+                                <mat-form-field class="underline-none" [style.width.%]="98">
+                                    <mat-icon matPrefix>search</mat-icon>
+                                    <input matInput autocomplete="off" value="{{row.product.name}}"
+                                        [matAutocomplete]="autoProduct" (keyup)="typeHeadProductInput($event)">
+
+                                    <button mat-button *ngIf="row.product.name!=''" tabindex="-1" matSuffix
+                                        mat-icon-button aria-label="Clear" (click)="cleanProduct(row)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+
+                                    <mat-autocomplete #autoProduct="matAutocomplete" [displayWith]="displayProductFn">
+                                        <mat-option *ngFor="let product of productSearch "
+                                            [disabled]="existStockItem(product)" [value]="product" class="product"
+                                            (onSelectionChange)="selectProduct(product,i)">
+                                            <div>
+                                                <span>{{ product.name }} Stock: {{product.stock|number}}</span>
+                                                <span *ngIf="(product.stock>1); then thenBlock else elseBlock"></span>
+                                                <ng-template #thenBlock> Units</ng-template>
+                                                <ng-template #elseBlock> UNit</ng-template>
+                                            </div>
+                                            <small>{{ product.description}} </small>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+
+
+                        <ng-container matColumnDef="quantity">
+                            <th mat-header-cell *matHeaderCellDef [style.width.%]="10">
+                                Quantity
+                            </th>
+                            <td mat-cell *matCellDef="let row" [style.width.%]="10">
+                                <mat-form-field class="underline-none">
+                                    <input matInput type="number" [(ngModel)]="row.quantity"
+                                        (change)="setValuesDetail(row,false)" (keyup)="setValuesDetail(row,false)"
+                                        autocomplete="off" class="text-center">
+                                </mat-form-field>
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="unit_price">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Unit price
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                                <div>{{row.product.price| currency}}</div>
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="total" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="column-marked text-right">TOTAL</th>
+                            <td mat-cell *matCellDef="let row; let i = index;" align="right" class="column-marked">
+                                <div class="pt-2 px-2 text-right">
+                                    {{(row.unitValue*row.quantity)|currency:'$'}}
+                                </div>
+                                <button mat-icon-button matTooltip="remove!" class="remove-detail trash"
+                                    matTooltipPosition="right" type="button" (click)="removeRow(i)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </ng-container>
+
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <button mat-stroked-button color="primary"
+                    [disabled]="!validateDetails(commercialDocument.typeDocument.inventoryOutput)"
+                    class="btn-primary btn-outline-info me-2 mt-5" type="button" (click)="addNewRow()">Add new row</button>
+
+                <button mat-raised-button color="primary" class="me-2 mt-4" type="button" [disabled]="isLoadingResults"
+                    *ngIf="validateDetails(commercialDocument.typeDocument.inventoryOutput)"
+                    (click)="generate()">Save</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

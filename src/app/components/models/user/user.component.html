@@ -1,0 +1,65 @@
+<div class="progress-content">
+    <!-- <mat-progress-bar [mode]="'indeterminate'" *ngIf="isLoadingResults"> </mat-progress-bar> -->
+</div>
+<app-breadcrumb [show]=true [bread]="bread"></app-breadcrumb>
+
+<div class="content margin_footer">
+    <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+            <mat-card-title>
+
+                <a mat-raised-button color="primary" routerLink="/home/user-manager"
+                    class="mat-elevation-z0 btn-outline">Manage users
+                </a>
+
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+            <div class="header sticky">
+                <mat-form-field>
+                    <input matInput placeholder="Search users" [(ngModel)]="query" (keyup)="filterTable($event)">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" class="table-striped"
+                [matSortActive]="active" matSortDisableClear matSortDirection="asc">
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        First name
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.name}}</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Last name
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.lastName}}</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="surName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Surname
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.surName}}</div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateTo(row.id)"></tr>
+            </table>
+        </mat-card-content>
+        <mat-card-footer class="footer sticky">
+            <mat-paginator #paginator [length]="resultsLength" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                [pageSizeOptions]="[10, 50, 100, 250]" [showFirstLastButtons]="true">
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>

@@ -1,0 +1,7 @@
+.notifique-bar {    
+    border-radius: 0px 0px 10px 10px;
+}
+
+mat-card-content.mat-card-content{
+    background-color: #f5f5f5;
+}

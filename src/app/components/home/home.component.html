@@ -1,0 +1,23 @@
+<mat-sidenav-container class="sidenav-container menu" autosize>
+    <mat-sidenav #drawer class="sidenav lateral-menu mat-elevation-z2" fixedInViewport="true" [attr.role]="'navigation'"
+        [mode]="'side'" [opened]="true" position="start" opened>
+        <mat-toolbar class="nav-header mb-4" >
+            <div class="brand-collapse">
+                Hulk Store
+            </div>
+        </mat-toolbar>
+        <app-side-nav></app-side-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <div>
+            <mat-toolbar class="header-toolbar ">
+            </mat-toolbar>
+            <app-wraper [ngClass]="{'expanded':!drawer.opened}"></app-wraper>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+<app-footer></app-footer>

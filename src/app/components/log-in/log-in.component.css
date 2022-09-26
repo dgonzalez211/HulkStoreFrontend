@@ -1,0 +1,53 @@
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.container-form{
+    width: 600px;
+    margin: 60px auto 0px;
+
+}
+
+.logo{
+    margin: 25px auto;
+}
+
+.btn-log{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.logo span {
+    position: relative;
+    font-family: "Avenir Next", sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    color:#1565c0;
+  }
+
+  /* We create a pseudo element and blur it using the SVG filter. We’ll grab the content from the custom HTML attribute. */
+  .logo span:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: attr(filter-content);
+    filter: url(#motion-blur-filter);
+  }
+
+  /* We hide the SVG filter element from the DOM as it would take up some space */
+  svg {
+    display: none;
+  }
+
+.mat-card {
+    background-color: #fdfdfd;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #0277bd !important;
+}

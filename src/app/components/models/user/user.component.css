@@ -1,0 +1,17 @@
+.more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-column-name1 .legal{
+    line-height: 13px;
+}
+
+.phone{
+    margin-left: 5px;
+}

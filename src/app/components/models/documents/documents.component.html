@@ -1,0 +1,65 @@
+<div class="progress-content">
+    <!-- <mat-progress-bar [mode]="'indeterminate'" *ngIf="isLoadingResults"> </mat-progress-bar> -->
+</div>
+<app-breadcrumb [show]=true [bread]="bread"></app-breadcrumb>
+
+<div class="content margin_footer">
+    <mat-card class="mat-elevation-z2">
+        <mat-card-content class="dashboard-card-content">
+            <div class="header sticky">
+                <mat-form-field>
+                    <input matInput placeholder="Search documents" [(ngModel)]="query" (keyup)="filterTable($event)">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" class="table-striped"
+                [matSortActive]="active" matSortDisableClear matSortDirection="asc">
+
+                <ng-container matColumnDef="typeDocument.name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Document
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.typeDocument.name}}</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="consecutive">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Consecutive
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>#{{row.consecutive}}</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="customer.name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Customer
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.customer.name}} {{row.customer.lastName}} {{row.customer.surName}}</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalValue">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Total
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div>{{row.totalValue | currency}}</div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </mat-card-content>
+        <mat-card-footer class="footer sticky">
+            <mat-paginator #paginator [length]="resultsLength" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                [pageSizeOptions]="[10, 50, 100, 250]" [showFirstLastButtons]="true">
+            </mat-paginator>
+        </mat-card-footer>
+    </mat-card>
+</div>

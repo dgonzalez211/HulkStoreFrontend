@@ -1,0 +1,14 @@
+<div class="grid-container">
+    <div class="row">
+        <div class="col-12">
+            <div class="content">
+                <ol class="breadcrumb">
+                    <li *ngFor="let crumb of bread.breads">
+                        <a routerLink='{{crumb.link}}' [ngClass]="{'active':crumb.active}">
+                            {{crumb.title}}</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
